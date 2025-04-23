@@ -8,9 +8,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,12 +42,29 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Counter(modifier: Modifier = Modifier) {
+    var count by rememberSaveable { mutableStateOf(0) }
     Column (modifier = modifier.fillMaxSize(), verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
+        Button(
+            onClick = {count++},
+            modifier = Modifier.size(75.dp, 50.dp)) {
+            Text(
+                text = "+",
+                fontSize = 30.sp
+            )
+        }
         Text(
-            text = "0",
+            text = count.toString(),
             fontSize = 192.sp
         )
+        Button(
+            onClick = {count--},
+            modifier = Modifier.size(75.dp, 50.dp)) {
+            Text(
+                text = "-",
+                fontSize = 30.sp
+            )
+        }
     }
 }
 
